@@ -18,9 +18,10 @@ jest.mock("../app/Store", () => mockStore)
 
 
 describe("Given I am connected as an employee", () => {
+
   describe("When I am on NewBill Page", () => {
 
-    test("The the newbills is loaded", () => {
+    test("The newbills page is loaded", () => {
 
       // je déclare que je suis un employé
 
@@ -61,7 +62,7 @@ describe("Given I am connected as an employee", () => {
 
     })
 
-    // on verifie le fichier
+    
 
     test("Then verify the file bill", async() => {
 
@@ -133,7 +134,7 @@ describe("Given I am connected as an employee", () => {
           name: "Vol Paris Montréal",
           date: "2022-02-15",
           amount: 200,
-          vat: 70,                     // changer les valeurs
+          vat: 70,                     
           pct: 30,
           commentary: "Commentary",
           fileUrl: "../img/0.jpg",
@@ -203,7 +204,7 @@ describe("Given I am connected as an employee", () => {
 
         // Je valide le formulaire
 
-        const handleSubmit = jest.fn((e) => newBill.handleSubmit(e)) // je déclare la fonction pour dire que ca valiee le formulaire
+        const handleSubmit = jest.fn((e) => newBill.handleSubmit(e)) // je déclare la fonction pour dire que ca valide le formulaire
         const button = screen.getByTestId("form-new-bill") // je récupère le bouton submit
         button.addEventListener("submit", handleSubmit) // J'applique un event au click je vérifie le formulaire
         fireEvent.submit(button) // j'appuie sur le boutton
