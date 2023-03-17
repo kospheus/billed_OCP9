@@ -22,6 +22,27 @@ export default class NewBill {
     const fileName = filePath[filePath.length-1]
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
+    const fileInput = this.document.querySelector(`input[data-testid="file"]`)
+    const validFileType = /(\.jpg|\.jpeg|\.png)/;
+
+    if (!validFileType.exec(filePath)) {
+      /* alert('Seuls les fichiers jpg, jpeg ou png sont acceptés.'); */
+      
+      if (this.document.querySelector('.error-message')){
+        fileInput.value=''
+        return false;
+      }
+        
+      const errorMessage = this.document.createElement('div')
+      errorMessage.setAttribute('data-testid', 'newbill-file-error-message')
+      errorMessage.style.color = 'red'
+      errorMessage.innerHTML = 'Seuls les fichiers jpg, jpeg ou png sont acceptés.'
+      errorMessage.classList.add('error-message')
+      fileInput.insertAdjacentElement('afterend', errorMessage)
+      fileInput.value=''
+      return false;
+    } 
+    
     formData.append('file', file)
     formData.append('email', email)
 
@@ -60,6 +81,9 @@ export default class NewBill {
     this.updateBill(bill)
     this.onNavigate(ROUTES_PATH['Bills'])
   }
+
+
+
 
   // not need to cover this function by tests
   updateBill = (bill) => {

@@ -110,6 +110,37 @@ describe("Given I am connected as an employee", () => {
     })
 
 
+    test("Then I can't select upload a non image file", () => {
+      document.body.innerHTML = NewBillUI()
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({ pathname })
+      }
+  
+      const newBill = new NewBill({
+        document,
+        onNavigate,
+        localStorage: window.localStorage,
+        store: null
+      })
+  
+      const handleChangeFile = jest.fn(newBill.handleChangeFile)
+      const inputFile = screen.getByTestId("file");
+      expect(inputFile).toBeTruthy()
+
+
+      inputFile.addEventListener("change", handleChangeFile)
+      fireEvent.change(inputFile, { target: { files: [new File(["file.pdf"], "file.pdf", { type: "file/pdf" })] } })
+
+
+      expect(handleChangeFile).toHaveBeenCalled();
+      expect(inputFile.files[0].name).not.toBe("file.jpg")
+
+      const errorMessage = screen.getByTestId("newbill-file-error-message")
+      expect(errorMessage).toBeTruthy()
+    })
+
+
+
     // Je vérifie si je peux envoyer une nouvelle bill
     
     test("Then I could submit the newbill", () => {
