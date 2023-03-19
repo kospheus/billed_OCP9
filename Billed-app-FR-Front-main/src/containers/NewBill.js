@@ -36,13 +36,13 @@ export default class NewBill {
       const errorMessage = this.document.createElement('div')
       errorMessage.setAttribute('data-testid', 'newbill-file-error-message')
       errorMessage.style.color = 'red'
-      errorMessage.innerHTML = 'Seuls les fichiers jpg, jpeg ou png sont acceptés.'
+      errorMessage.innerHTML = 'Veuillez sélectionner un fichier jpg, jpeg ou png.'
       errorMessage.classList.add('error-message')
       fileInput.insertAdjacentElement('afterend', errorMessage)
       fileInput.value=''
       return false;
     } 
-    
+
     formData.append('file', file)
     formData.append('email', email)
 
