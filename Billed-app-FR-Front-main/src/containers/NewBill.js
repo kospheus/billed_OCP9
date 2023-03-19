@@ -26,7 +26,6 @@ export default class NewBill {
     const validFileType = /(\.jpg|\.jpeg|\.png)/;
 
     if (!validFileType.exec(filePath)) {
-      /* alert('Seuls les fichiers jpg, jpeg ou png sont acceptés.'); */
       
       if (this.document.querySelector('.error-message')){
         fileInput.value=''
